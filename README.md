@@ -1,9 +1,14 @@
-# pico-graphics
+# pico-donut
+
+This is a port of the donut.c version from:
+
+https://www.a1k0n.net/2025/01/10/tiny-tapeout-donut.html
+
+I have basically mimic the behaviour or his demo, fps is about 7-8 fps in a pico2 displaying to st7789 (240x240) but drawing donut at 120x120 resolution.
+
+Install Intruccions:
 
 1. Import project into raspberry pico vs code extension
 
 2. It will run straightforward with raspberry pico explorer from pimoroni, button is assumed to be Y (gpio 15)
 
-Ported from: https://www.youtube.com/watch?v=YLf2WXjunyg
-
-Original code for STM32: https://github.com/cbm80amiga/ST7789_3D_Filled_Vector_Ext
