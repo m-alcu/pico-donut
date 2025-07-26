@@ -4,7 +4,7 @@ This is a port of the donut.c version from:
 
 https://www.a1k0n.net/2025/01/10/tiny-tapeout-donut.html
 
-I have basically mimic the behaviour or his demo, fps is about 7-8 fps in a pico2 displaying to st7789 (240x240) but drawing donut at 120x120 resolution.
+I have basically mimic the behaviour of the demo, fps is about 7-8 fps in a pico2 displayed to st7789 (240x240) but rendering donut at lower 120x120 resolution.
 
 This is the result: 
 
