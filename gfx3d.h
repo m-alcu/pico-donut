@@ -1,25 +1,3 @@
-// 3D Filled Vector Graphics
-// (c) 2019 Pawel A. Hernik
-
-/*
- Implemented features:
- - optimized rendering without local framebuffer, in STM32 case 1 to 32 lines buffer can be used
- - pattern based background
- - 3D starfield
- - no floating point arithmetic
- - no slow trigonometric functions
- - rotations around X and Y axes
- - simple outside screen culling
- - rasterizer working for all convex polygons
- - backface culling
- - visible faces sorting by Z axis
- - support for quads and triangles
- - optimized structures, saved some RAM and flash
- - added models
- - optimized stats displaying
- - fake light shading
-*/
-
 #include "libraries/pico_graphics/pico_graphics.hpp"
 
 uint16_t BLUE = pimoroni::RGB(0,86,253).to_rgb565(); // BLACK
