@@ -8,7 +8,7 @@ I have basically mimic the behaviour or his demo, fps is about 7-8 fps in a pico
 
 This is the result: 
 
-![Pico explorer with st7789 display](resources/pico-explorer.jpeg)
+![Pico explorer with st7789 display](resources/pico-explorer.mp4)
 
 Install Intruccions:
 
