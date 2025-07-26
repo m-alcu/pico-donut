@@ -19,7 +19,7 @@ int16_t sAcB = 11583, cAcB = 11583;
 
 int iter1 = 3, iter2 = 2;
 
-// CORDIC algorithm (calculate the length of a vector)
+// CORDIC algorithm (calculate the length of a vector https://en.wikipedia.org/wiki/CORDIC)
 inline int length_cordic(int16_t x, int16_t y, int16_t *x2_, int16_t y2, int16_t iterations = 8) {
     int x2 = *x2_;
     if (x < 0) {
@@ -67,7 +67,9 @@ void drawTorus(uint16_t* frBuf, uint16_t* color565_table) {
 
     backgroundChecker(sA, sB, frBuf);
 
-    // yes this is a multiply but dz is 5 so it's (sb + (sb<<2)) >> 6 effectively    
+    // Don't worry, even though this looks like a multiplication, 
+    // the compiler will probably optimize it into shifts 
+    // and adds because dz is a known constant (5). 
     int p0x = dz * sB >> 6;
     int p0y = dz * sAcB >> 6;
     int p0z = -dz * cAcB >> 6;
