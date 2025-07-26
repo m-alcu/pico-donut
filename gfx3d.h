@@ -74,11 +74,13 @@ void backgroundChecker(int sA, int sB, uint16_t* frBuf)
   xo = (sB >> 9)+50;
   yo = (sA >> 9)+50;
 
-  for(y=0;y<SCREEN_HEIGHT;y++) {
+  int hy = 0;
+
+  for(y=0;y<SCREEN_HEIGHT;y++, hy+= SCREEN_WIDTH) {
     yy = (y+yo) % 64;
     for(x=0;x<SCREEN_WIDTH;x++) {
       xx = (x+xo) % 64;
-      frBuf[SCREEN_WIDTH*y+x] = ((xx<32 && yy<32) || (xx>32 && yy>32)) ? BLUE : GREY;
+      frBuf[hy+x] = ((xx<32 && yy<32) || (xx>32 && yy>32)) ? BLUE : GREY;
     }
   }
 }
