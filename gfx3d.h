@@ -138,7 +138,6 @@ void drawTorus(uint16_t* frBuf, uint16_t* color565_table) {
                     break;
                 } else if (d < 3) {
                     int N = lz >> 5;
-                    // Draw to the SDL canvas (mapping ASCII characters to pixel brightness)
                     uint16_t color = color565_table[(N > 0 ? N < 256 ? N : 255 : 0)];
                     int index = j * SCREEN_WIDTH + i;
                     frBuf[index] = color;
