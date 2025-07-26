@@ -19,7 +19,7 @@ int16_t sAcB = 11583, cAcB = 11583;
 
 int iter1 = 3, iter2 = 2;
 
-// CORDIC algorithm (same as your original code)
+// CORDIC algorithm (calculate the length of a vector)
 inline int length_cordic(int16_t x, int16_t y, int16_t *x2_, int16_t y2, int16_t iterations = 8) {
     int x2 = *x2_;
     if (x < 0) {
