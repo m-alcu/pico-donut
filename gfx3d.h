@@ -32,6 +32,7 @@ const int dz = 5, r1 = 1, r2 = 2;
 // SDL screen dimensions
 const int SCREEN_WIDTH = 240;
 const int SCREEN_HEIGHT = 240;
+const int SCREEN_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT;
 
 int16_t sB = 0, cB = 16384;
 int16_t sA = 11583, cA = 11583;
@@ -106,7 +107,7 @@ void drawTorus(uint16_t* frBuf, uint16_t* color565_table) {
     int16_t ycA = -cA;
     int16_t ysA = -sA;
 
-    for (int j = 0; j < SCREEN_HEIGHT; j +=2, ycA += yincC, ysA += yincS) {
+    for (int j = 0; j < SCREEN_SIZE; j +=(SCREEN_WIDTH << 1), ycA += yincC, ysA += yincS) {
         int xsAsB = (sAsB >> 4) - sAsB;
         int xcAsB = (cAsB >> 4) - cAsB;
 
@@ -139,7 +140,7 @@ void drawTorus(uint16_t* frBuf, uint16_t* color565_table) {
                 } else if (d < 3) {
                     int N = lz >> 5;
                     uint16_t color = color565_table[(N > 0 ? N < 256 ? N : 255 : 0)];
-                    int index = j * SCREEN_WIDTH + i;
+                    int index = j + i;
                     frBuf[index] = color;
                     frBuf[index+1] = color;
                     frBuf[index+SCREEN_WIDTH] = color;
