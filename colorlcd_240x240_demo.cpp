@@ -163,11 +163,11 @@ int main() {
     ms=millis();
 
     drawTorus(angles, HALF_HEIGHT*WIDTH, HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
-    
-    ms=millis()-ms;
-    showStats();
 
     while (!core1_done) tight_loop_contents();
+
+    ms=millis()-ms;
+    showStats();
 
     // update screen
     st7789.update(&graphics);
