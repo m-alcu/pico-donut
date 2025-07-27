@@ -79,9 +79,10 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
 
     int jb = 0;
 
+    int xsAsB = (angles.sAsB >> 4) - angles.sAsB;
+    int xcAsB = (angles.cAsB >> 4) - angles.cAsB;
+
     for (int j = 0; j < SCREEN_SIZE; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jb +=2) {
-        int xsAsB = (angles.sAsB >> 4) - angles.sAsB;
-        int xcAsB = (angles.cAsB >> 4) - angles.cAsB;
 
         int16_t vxi14 = (angles.cB >> 4) - angles.cB - angles.sB;
         int16_t vyi14 = ycA - xsAsB - angles.sAcB;
