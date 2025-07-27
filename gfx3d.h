@@ -116,6 +116,7 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
 
                     int index = j + i;
                     if (t > 8 * 256) {
+                        // if the distance is too large, draw the background, a blue grey chess pattern
                         uint16_t color = ((jbx<32 && ix<32) || (jbx>32 && ix>32)) ? BLUE : GREY;
                         frBuf[index] = color;
                         frBuf[index+1] = color;

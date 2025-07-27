@@ -127,10 +127,13 @@ int main() {
   
   while(true) {
 
-    //printf("core0");
-
     core0_done = false;
     core1_done = false;    
+
+    /*
+    Buttons change the number of iterations for the CORDIC algorithm.
+    Whem reducing the number of iterations, the torus will be drawn faster and with faceted edges.
+    */
 
     bool button_a = gpio_get(BUTTON_PIN_A);
     if (!button_a && last_button_a) {  // pressed (falling edge, active low)
@@ -143,7 +146,6 @@ int main() {
         iter1--;
     }
     last_button_b = button_b;
-
 
     bool button_x = gpio_get(BUTTON_PIN_X);
     if (!button_x && last_button_x) {  // pressed (falling edge, active low)
