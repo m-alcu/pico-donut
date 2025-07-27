@@ -67,8 +67,6 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
     const int r1i = r1 * 256;
     const int r2i = r2 * 256;
 
-    int niters = 0;
-    int nnormals = 0;
     int16_t yincC = (angles.cA >> 6);
     int16_t yincS = (angles.sA >> 6);
 
@@ -131,14 +129,12 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
                         frBuf[index+1] = color;
                         frBuf[index+WIDTH] = color;
                         frBuf[index+WIDTH+1] = color;
-                        nnormals++;
                         break;
                     }
 
                     px += d * vxi14 >> 14;
                     py += d * vyi14 >> 14;
                     pz += d * vzi14 >> 14;
-                    niters++;
                 }
             }
 
