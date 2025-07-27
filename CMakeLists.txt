@@ -50,7 +50,7 @@ add_subdirectory(libraries)
 
 # Add the standard library to the build
 target_link_libraries(colorlcd_240x240_demo
-        pico_stdlib pico_graphics st7789)
+        pico_stdlib pico_multicore pico_graphics st7789)
 
 # Add the standard include files to the build
 target_include_directories(colorlcd_240x240_demo PRIVATE
