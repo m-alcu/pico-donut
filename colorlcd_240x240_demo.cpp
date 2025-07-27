@@ -27,6 +27,12 @@ volatile bool core1_done = false;
 ST7789 st7789(WIDTH, HEIGHT, ROTATE_0, false, get_spi_pins(BG_SPI_FRONT));
 PicoGraphics_PenRGB565 graphics(st7789.width, st7789.height, frBuf);
 
+int iter1 = 3, iter2 = 2;
+bool last_button_a = true;
+bool last_button_b = true;
+bool last_button_x = true;
+bool last_button_y = true;
+
 void core1_main() {
 
     torus3d::TorusAngles angles;
@@ -42,7 +48,7 @@ void core1_main() {
 
     while (true) {
 
-        drawTorus(angles, 0, 120*240, frBuf, color565_table);
+        drawTorus(angles, 0, 120*240, frBuf, color565_table, iter1, iter2);
         core1_done = true;
         // Wait for core0 to finish
         while (!core0_done) tight_loop_contents();
@@ -127,14 +133,33 @@ int main() {
     core1_done = false;    
 
     bool button_a = gpio_get(BUTTON_PIN_A);
-    bool button_b = gpio_get(BUTTON_PIN_B);
-    bool button_x = gpio_get(BUTTON_PIN_X);
-    bool button_y = gpio_get(BUTTON_PIN_Y);
+    if (!button_a && last_button_a) {  // pressed (falling edge, active low)
+        iter1++;
+    }
+    last_button_a = button_a;
 
+    bool button_b = gpio_get(BUTTON_PIN_B);
+    if (!button_b && last_button_b) {  // pressed (falling edge, active low)
+        iter1--;
+    }
+    last_button_b = button_b;
+
+
+    bool button_x = gpio_get(BUTTON_PIN_X);
+    if (!button_x && last_button_x) {  // pressed (falling edge, active low)
+        iter2++;
+    }
+    last_button_x = button_x;
+
+    bool button_y = gpio_get(BUTTON_PIN_Y);
+    if (!button_y && last_button_y) {  // pressed (falling edge, active low)
+        iter2--;
+    }
+    last_button_y = button_y;
 
     ms=millis();
 
-    drawTorus(angles, 120*240, 240*240, frBuf, color565_table);
+    drawTorus(angles, 120*240, 240*240, frBuf, color565_table, iter1, iter2);
     
     ms=millis()-ms;
     showStats();

@@ -12,8 +12,6 @@ const int SCREEN_WIDTH = 240;
 const int SCREEN_HEIGHT = 240;
 const int SCREEN_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT;
 
-int iter1 = 8, iter2 = 8;
-
 namespace torus3d {
 
     struct TorusAngles {
@@ -55,7 +53,7 @@ inline int length_cordic(int16_t x, int16_t y, int16_t *x2_, int16_t y2, int16_t
     return (x >> 1) + (x >> 3);
 }
 
-void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t* frBuf, uint16_t* color565_table) {
+void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t* frBuf, uint16_t* color565_table, int iter1, int iter2) {
 
     //backgroundChecker(angles.sA, angles.sB, frBuf);
 
