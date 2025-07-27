@@ -7,10 +7,10 @@ uint16_t GREY = pimoroni::RGB(200,200,200).to_rgb565(); // BLACK
 const int dz = 5, r1 = 1, r2 = 2;
 #define R(s,x,y) x-=(y>>s); y+=(x>>s)
 
-// SDL screen dimensions
-const int SCREEN_WIDTH = 240;
-const int SCREEN_HEIGHT = 240;
-const int SCREEN_SIZE = SCREEN_WIDTH * SCREEN_HEIGHT;
+const int WIDTH = 240;
+const int HEIGHT = 240;
+const int HALF_HEIGHT = HEIGHT >> 1;
+const int SCREEN_SIZE = WIDTH * HEIGHT;
 
 namespace torus3d {
 
@@ -81,7 +81,7 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
 
     int jb = 0;
 
-    for (int j = 0; j < SCREEN_SIZE; j +=(SCREEN_WIDTH << 1), ycA += yincC, ysA += yincS, jb +=2) {
+    for (int j = 0; j < SCREEN_SIZE; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jb +=2) {
         int xsAsB = (angles.sAsB >> 4) - angles.sAsB;
         int xcAsB = (angles.cAsB >> 4) - angles.cAsB;
 
@@ -91,7 +91,7 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
 
         int jbx = jb % 64;
 
-        for (int i = 0; i < SCREEN_WIDTH; i +=2, vxi14 += xincX, vyi14 -= xincY, vzi14 += xincZ) {
+        for (int i = 0; i < WIDTH; i +=2, vxi14 += xincX, vyi14 -= xincY, vzi14 += xincZ) {
             int t = 512; // (256 * dz) - r2i - r1i;
 
             int ix = i % 64;
@@ -120,8 +120,8 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
                         uint16_t color = ((jbx<32 && ix<32) || (jbx>32 && ix>32)) ? BLUE : GREY;
                         frBuf[index] = color;
                         frBuf[index+1] = color;
-                        frBuf[index+SCREEN_WIDTH] = color;
-                        frBuf[index+SCREEN_WIDTH+1] = color;
+                        frBuf[index+WIDTH] = color;
+                        frBuf[index+WIDTH+1] = color;
                         break;
                     } else if (d < 3) {
                         int N = lz >> 5;
@@ -129,8 +129,8 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
                         int index = j + i;
                         frBuf[index] = color;
                         frBuf[index+1] = color;
-                        frBuf[index+SCREEN_WIDTH] = color;
-                        frBuf[index+SCREEN_WIDTH+1] = color;
+                        frBuf[index+WIDTH] = color;
+                        frBuf[index+WIDTH+1] = color;
                         nnormals++;
                         break;
                     }

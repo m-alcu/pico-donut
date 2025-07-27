@@ -10,10 +10,6 @@
 using namespace pimoroni;
 using namespace torus3d;
 
-const int WIDTH = 240;
-const int HEIGHT = 240;
-const int HALF_HEIGHT = HEIGHT >> 1;
-
 #define BUTTON_PIN_A 12
 #define BUTTON_PIN_B 13
 #define BUTTON_PIN_X 14
