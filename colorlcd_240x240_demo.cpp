@@ -24,7 +24,7 @@ volatile bool core1_done = false;
 ST7789 st7789(WIDTH, HEIGHT, ROTATE_0, false, get_spi_pins(BG_SPI_FRONT));
 PicoGraphics_PenRGB565 graphics(st7789.width, st7789.height, frBuf);
 
-int iter1 = 3, iter2 = 2;
+int iter1 = 3, iter2 = 2; //Starting with basic facelet torus with 3 iterations in cordic1 and 2 in cordic2
 bool last_button_a = true;
 bool last_button_b = true;
 bool last_button_x = true;
