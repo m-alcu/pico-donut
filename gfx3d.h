@@ -77,18 +77,18 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
     int16_t ycA = -angles.cA;
     int16_t ysA = -angles.sA;
 
-    int jb = 0;
+    int jpixel = 0;
 
     int xsAsB = (angles.sAsB >> 4) - angles.sAsB;
     int xcAsB = (angles.cAsB >> 4) - angles.cAsB;
 
-    for (int j = 0; j < SCREEN_SIZE; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jb +=2) {
+    for (int j = 0; j < SCREEN_SIZE; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jpixel +=2) {
 
         int16_t vxi14 = (angles.cB >> 4) - angles.cB - angles.sB;
         int16_t vyi14 = ycA - xsAsB - angles.sAcB;
         int16_t vzi14 = ysA + xcAsB + angles.cAcB;
 
-        int jbx = jb % 64;
+        int jpixelx = jpixel % 64;
 
         for (int i = 0; i < WIDTH; i +=2, vxi14 += xincX, vyi14 -= xincY, vzi14 += xincZ) {
             int t = 512; // (256 * dz) - r2i - r1i;
@@ -116,7 +116,7 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
                     int index = j + i;
                     if (t > 8 * 256) {
                         // if the distance is too large, draw the background, a blue grey chess pattern
-                        uint16_t color = ((jbx<32 && ix<32) || (jbx>32 && ix>32)) ? BLUE : GREY;
+                        uint16_t color = ((jpixelx<32 && ix<32) || (jpixelx>32 && ix>32)) ? BLUE : GREY;
                         frBuf[index] = color;
                         frBuf[index+1] = color;
                         frBuf[index+WIDTH] = color;
