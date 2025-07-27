@@ -64,7 +64,7 @@ void showStats() {
 
     Pen YELLOW  = graphics.create_pen(255, 255, 0);
     Pen GREEN   = graphics.create_pen(0, 255, 0);
-    Pen MAGENTA = graphics.create_pen(255, 0, 255);
+    Pen RED = graphics.create_pen(255, 0, 0);
 
     char txt[30];
  
@@ -80,7 +80,7 @@ void showStats() {
     graphics.text(txt, Point(0, HEIGHT - 22), 240);
 
     snprintf(txt, 30, "r1: %d r2: %d", iter1, iter2);
-    graphics.set_pen(MAGENTA);
+    graphics.set_pen(RED);
     graphics.text(txt, Point(0, HEIGHT - 12), 240);
 
 }
