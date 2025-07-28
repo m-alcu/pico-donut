@@ -55,8 +55,6 @@ inline int length_cordic(int16_t x, int16_t y, int16_t *x2_, int16_t y2, int16_t
 
 void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t* frBuf, uint16_t* color565_table, int iter1, int iter2) {
 
-    //backgroundChecker(angles.sA, angles.sB, frBuf);
-
     // Don't worry, even though this looks like a multiplication, 
     // the compiler will probably optimize it into shifts 
     // and adds because dz is a known constant (5). 
@@ -124,7 +122,6 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
                 } else if (d < 3) {
                     int N = lz >> 5;
                     uint16_t color = color565_table[(N > 0 ? N < 256 ? N : 255 : 0)];
-                    int index = j + i;
                     frBuf[index] = color;
                     frBuf[index+1] = color;
                     frBuf[index+WIDTH] = color;
