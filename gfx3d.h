@@ -74,15 +74,15 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
     int16_t xincY = (angles.sAsB >> 6);
     int16_t xincZ = (angles.cAsB >> 6);
         
-    int16_t ycA = -angles.cA;
-    int16_t ysA = -angles.sA;
+    int16_t ycA = -angles.cA + (fromLine > 0 ? 60 : 0) * yincC;
+    int16_t ysA = -angles.sA + (fromLine > 0 ? 60 : 0) * yincS;
 
     int jpixel = 0;
 
     int xsAsB = (angles.sAsB >> 4) - angles.sAsB;
     int xcAsB = (angles.cAsB >> 4) - angles.cAsB;
 
-    for (int j = 0; j < SCREEN_SIZE; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jpixel +=2) {
+    for (int j = fromLine; j < toLine; j +=(WIDTH << 1), ycA += yincC, ysA += yincS, jpixel +=2) {
 
         int16_t vxi14 = (angles.cB >> 4) - angles.cB - angles.sB;
         int16_t vyi14 = ycA - xsAsB - angles.sAcB;
@@ -103,40 +103,38 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
             int16_t ly0 = angles.sAcB - angles.cA >> 2;
             int16_t lz0 = -angles.cAcB - angles.sA >> 2;
 
-            if (j >= fromLine && j < toLine) {
-                for (;;) {
-                    int t0, t1, t2, d;
-                    int16_t lx = lx0, ly = ly0, lz = lz0;
-                    t0 = length_cordic(px, py, &lx, ly, iter1);
-                    t1 = t0 - r2i;
-                    t2 = length_cordic(pz, t1, &lz, lx, iter2);
-                    d = t2 - r1i;
-                    t += d;
+            for (;;) {
+                int t0, t1, t2, d;
+                int16_t lx = lx0, ly = ly0, lz = lz0;
+                t0 = length_cordic(px, py, &lx, ly, iter1);
+                t1 = t0 - r2i;
+                t2 = length_cordic(pz, t1, &lz, lx, iter2);
+                d = t2 - r1i;
+                t += d;
 
+                int index = j + i;
+                if (t > 8 * 256) {
+                    // if the distance is too large, draw the background, a blue grey chess pattern
+                    uint16_t color = ((jpixelx<32 && ix<32) || (jpixelx>32 && ix>32)) ? BLUE : GREY;
+                    frBuf[index] = color;
+                    frBuf[index+1] = color;
+                    frBuf[index+WIDTH] = color;
+                    frBuf[index+WIDTH+1] = color;
+                    break;
+                } else if (d < 3) {
+                    int N = lz >> 5;
+                    uint16_t color = color565_table[(N > 0 ? N < 256 ? N : 255 : 0)];
                     int index = j + i;
-                    if (t > 8 * 256) {
-                        // if the distance is too large, draw the background, a blue grey chess pattern
-                        uint16_t color = ((jpixelx<32 && ix<32) || (jpixelx>32 && ix>32)) ? BLUE : GREY;
-                        frBuf[index] = color;
-                        frBuf[index+1] = color;
-                        frBuf[index+WIDTH] = color;
-                        frBuf[index+WIDTH+1] = color;
-                        break;
-                    } else if (d < 3) {
-                        int N = lz >> 5;
-                        uint16_t color = color565_table[(N > 0 ? N < 256 ? N : 255 : 0)];
-                        int index = j + i;
-                        frBuf[index] = color;
-                        frBuf[index+1] = color;
-                        frBuf[index+WIDTH] = color;
-                        frBuf[index+WIDTH+1] = color;
-                        break;
-                    }
-
-                    px += d * vxi14 >> 14;
-                    py += d * vyi14 >> 14;
-                    pz += d * vzi14 >> 14;
+                    frBuf[index] = color;
+                    frBuf[index+1] = color;
+                    frBuf[index+WIDTH] = color;
+                    frBuf[index+WIDTH+1] = color;
+                    break;
                 }
+
+                px += d * vxi14 >> 14;
+                py += d * vyi14 >> 14;
+                pz += d * vzi14 >> 14;
             }
 
         }
