@@ -36,7 +36,7 @@ void core1_main() {
 
     while (true) {
 
-        drawTorus(angles, 0, HALF_HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
+        drawTorus(angles, HALF_HEIGHT*WIDTH, HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
         core1_done = true;
         // Wait for core0 to finish
         while (!core0_done) tight_loop_contents();
@@ -140,7 +140,7 @@ int main() {
 
     ms=millis();
 
-    drawTorus(angles, HALF_HEIGHT*WIDTH, HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
+    drawTorus(angles, 0, HALF_HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
 
     while (!core1_done) tight_loop_contents();
 
