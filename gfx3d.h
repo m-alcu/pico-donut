@@ -15,14 +15,14 @@ const int SCREEN_SIZE = WIDTH * HEIGHT;
 namespace torus3d {
 
     struct TorusAngles {
-        int16_t sB;
-        int16_t cB;
-        int16_t sA;
-        int16_t cA;
-        int16_t sAsB;
-        int16_t cAsB;
-        int16_t sAcB; 
-        int16_t cAcB;
+        int16_t sB = 0;
+        int16_t cB = 16384; // 16384 = 1 << 14, cos(0) in Q14 format
+        int16_t sA = 11583; // sin(45 degrees) in Q14 format
+        int16_t cA = 11583; // cos(45 degrees) in Q14 format
+        int16_t sAsB = 0; // sin(A + B) in Q14 format
+        int16_t cAsB = 0; // cos(A + B) in Q14 format
+        int16_t sAcB = 11583; // sin(A - B) in Q14 format
+        int16_t cAcB = 11583; // cos(A - B) in Q14 format
     };
 
 }

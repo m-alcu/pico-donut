@@ -34,15 +34,6 @@ void core1_main() {
 
     torus3d::TorusAngles angles;
 
-    angles.sB = 0;     
-    angles.cB = 16384;
-    angles.sA = 11583; 
-    angles.cA = 11583;
-    angles.sAsB = 0;   
-    angles.cAsB = 0;
-    angles.sAcB = 11583; 
-    angles.cAcB = 11583;       
-
     while (true) {
 
         drawTorus(angles, 0, HALF_HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
@@ -86,15 +77,6 @@ int main() {
   stdio_init_all();
 
   torus3d::TorusAngles angles;
-
-  angles.sB = 0;     
-  angles.cB = 16384;
-  angles.sA = 11583; 
-  angles.cA = 11583;
-  angles.sAsB = 0;   
-  angles.cAsB = 0;
-  angles.sAcB = 11583; 
-  angles.cAcB = 11583;      
 
   //precopumpute color565 table
   for (int c = 0; c < 256; ++c) {
