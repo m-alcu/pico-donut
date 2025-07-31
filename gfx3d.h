@@ -1,7 +1,7 @@
 #include "libraries/pico_graphics/pico_graphics.hpp"
 
-uint16_t BLUE = pimoroni::RGB(0,86,253).to_rgb565(); // BLACK
-uint16_t GREY = pimoroni::RGB(200,200,200).to_rgb565(); // BLACK
+uint16_t BLUE = pimoroni::RGB(0,86,253).to_rgb565(); // BLUE
+uint16_t GREY = pimoroni::RGB(200,200,200).to_rgb565(); // GREY
 
 
 const int dz = 5, r1 = 1, r2 = 2;
@@ -72,8 +72,8 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
     int16_t xincY = (angles.sAsB >> 6);
     int16_t xincZ = (angles.cAsB >> 6);
         
-    int16_t ycA = -angles.cA + (fromLine > 0 ? 60 : 0) * yincC;
-    int16_t ysA = -angles.sA + (fromLine > 0 ? 60 : 0) * yincS;
+    int16_t ycA = -angles.cA + (fromLine > 0 ? (HEIGHT >> 2) : 0) * yincC;
+    int16_t ysA = -angles.sA + (fromLine > 0 ? (HEIGHT >> 2) : 0) * yincS;
 
     int jpixel = 0;
 
@@ -137,15 +137,5 @@ void drawTorus(torus3d::TorusAngles& angles, int fromLine, int toLine, uint16_t*
 
         }
     }
-
-    // rotate sines, cosines, and products thereof
-    // this animates the torus rotation about two axes
-    R(5, angles.cA, angles.sA);
-    R(5, angles.cAsB, angles.sAsB);
-    R(5, angles.cAcB, angles.sAcB);
-    R(6, angles.cB, angles.sB);
-    R(6, angles.cAcB, angles.cAsB);
-    R(6, angles.sAcB, angles.sAsB);
-    //printf("cA: %d, sA: %d\n", angles.cA, angles.sA);
 
 }

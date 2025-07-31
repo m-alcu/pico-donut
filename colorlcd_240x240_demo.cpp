@@ -32,9 +32,9 @@ bool last_button_b = true;
 bool last_button_x = true;
 bool last_button_y = true;
 
-void core1_main() {
+torus3d::TorusAngles angles;
 
-    torus3d::TorusAngles angles;
+void core1_main() {
 
     while (true) {
 
@@ -79,8 +79,6 @@ void showStats() {
 int main() {
 
   stdio_init_all();
-
-  torus3d::TorusAngles angles;
 
   //precopumpute color565 table
   for (int c = 0; c < 256; ++c) {
@@ -154,6 +152,16 @@ int main() {
     // update screen
     st7789.update(&graphics);
     core0_done = true;
+
+    // rotate sines, cosines, and products thereof
+    // this animates the torus rotation about two axes
+    R(5, angles.cA, angles.sA);
+    R(5, angles.cAsB, angles.sAsB);
+    R(5, angles.cAcB, angles.sAcB);
+    R(6, angles.cB, angles.sB);
+    R(6, angles.cAcB, angles.cAsB);
+    R(6, angles.sAcB, angles.sAsB);
+    //printf("cA: %d, sA: %d\n", angles.cA, angles.sA);    
 
     }
     
