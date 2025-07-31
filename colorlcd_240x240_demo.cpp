@@ -16,6 +16,8 @@ using namespace torus3d;
 #define BUTTON_PIN_Y 15
 
 uint16_t frBuf[WIDTH*HEIGHT];
+
+
 uint16_t color565_table[256];
 
 volatile bool core0_done = false;
@@ -35,6 +37,8 @@ void core1_main() {
     torus3d::TorusAngles angles;
 
     while (true) {
+
+        core1_done = false;
 
         drawTorus(angles, HALF_HEIGHT*WIDTH, HEIGHT*WIDTH, frBuf, color565_table, iter1, iter2);
         core1_done = true;
